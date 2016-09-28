@@ -1,5 +1,8 @@
 @import "global-styles"; 
 
+@search-box-height: 200px;
+@search-box-margin: 20px;
+
 main {
 	position: absolute;
 	top: @header-height;
@@ -8,4 +11,15 @@ main {
 }
 #map { 
 	height: 100%; 
+}
+
+#search-box {
+	position: absolute;
+	top: 0;
+	left: @search-box-margin;
+	right: @search-box-margin;
+	height: @search-box-height;
+	margin: 0 auto;
+	background-color: white;
+	box-shadow: 1px 1px 5px 0px rgba(100,100,100,1);
 }

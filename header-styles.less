@@ -1,0 +1,25 @@
+@import "global-styles"; 
+
+header {
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: @header-height;
+	background-color: rgb(77, 194, 209);
+	color: white;
+	text-align: center;
+}
+header .title {
+	text-transform: uppercase;
+	display: inline-block;
+	margin: 0 auto;
+	height: @header-height;
+	line-height: @header-height;
+}
+header #open-sidebar-menu-button {
+	position: absolute;
+	left: @header-height/3;
+	height: @header-height;
+	line-height: @header-height;
+}

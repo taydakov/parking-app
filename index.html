@@ -2,7 +2,10 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
-		<link rel="stylesheet/less" type="text/css" href="styles.less" />
+		<link rel="stylesheet/less" type="text/css" href="global-styles.less" />
+		<link rel="stylesheet/less" type="text/css" href="header-styles.less" />
+		<link rel="stylesheet/less" type="text/css" href="sidebar-styles.less" />
+		<link rel="stylesheet/less" type="text/css" href="content-styles.less" />
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 		<script src="less.min.js" type="text/javascript"></script>
 	</head>
@@ -18,7 +21,6 @@
 				<li>Log out</li>
 			</ul>
 			<div id="sidebar-remaining"></div>
-			<span id="close-sidebar-menu-button"><i class="fa fa-times" aria-hidden="true"></i></span>
 		</sidebar>
 		<main>
 			<div id="map"></div>
@@ -41,7 +43,7 @@
 				sidebarMenuEl.classList.remove("closed");
 				sidebarMenuEl.classList.add("open");
 			};
-			document.getElementById("close-sidebar-menu-button").onclick = document.getElementById("sidebar-remaining").onclick = function () {
+			document.getElementById("sidebar-remaining").onclick = function () {
 				var sidebarMenuEl = document.getElementById("sidebar-menu");
 				sidebarMenuEl.classList.remove("open");
 				sidebarMenuEl.classList.add("closed");

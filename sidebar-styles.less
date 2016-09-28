@@ -1,0 +1,53 @@
+@sidebar-width: 200px;
+@sidebar-animation-duration: 0.3s;
+
+sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1001;
+	overflow: hidden;
+}
+sidebar.open {
+	visibility: visible;
+	transition: visibility @sidebar-animation-duration;
+}
+sidebar.closed {
+	visibility: collapse;
+	transition: visibility @sidebar-animation-duration;
+}
+sidebar .sidebar-menu {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: @sidebar-width;
+	background-color: green;
+	z-index: 2;
+}
+sidebar #sidebar-remaining {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: black;
+	z-index: 1;
+}
+sidebar.open .sidebar-menu {
+	left: 0;
+	transition: left @sidebar-animation-duration;
+}
+sidebar.closed .sidebar-menu {
+	left: -@sidebar-width;
+	transition: left @sidebar-animation-duration;
+}
+sidebar.open #sidebar-remaining {
+	opacity: 0.3;
+	transition: opacity @sidebar-animation-duration;
+}
+sidebar.closed #sidebar-remaining {
+	opacity: 0;
+	transition: opacity @sidebar-animation-duration;
+}

@@ -61,29 +61,18 @@ sidebar .sidebar-menu {
 	background-color: green;
 	z-index: 2;
 }
-sidebar .sidebar-remaining {
+sidebar #sidebar-remaining {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	background-color: black;
+	opacity: 0.3;
 	z-index: 1;
 }
 sidebar #close-sidebar-menu-button {
 	position: absolute;
 	top: 100px;
 	z-index: 3;
-}
-sidebar.open .sidebar-remaining {
-	opacity: 0.3;
-}
-sidebar.closed .sidebar-remaining {
-	opacity: 0;
-}
-sidebar.open .sidebar-menu {
-	left: 0;
-}
-sidebar.closed .sidebar-menu {
-	left: -@sidebar-width;
 }

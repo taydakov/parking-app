@@ -17,7 +17,7 @@
 				<li>My reservations</li>
 				<li>Log out</li>
 			</ul>
-			<div class="sidebar-remaining"></div>
+			<div id="sidebar-remaining"></div>
 			<span id="close-sidebar-menu-button"><i class="fa fa-times" aria-hidden="true"></i></span>
 		</sidebar>
 		<main>
@@ -41,7 +41,7 @@
 				sidebarMenuEl.classList.remove("closed");
 				sidebarMenuEl.classList.add("open");
 			};
-			document.getElementById("close-sidebar-menu-button").onclick = function () {
+			document.getElementById("close-sidebar-menu-button").onclick = document.getElementById("sidebar-remaining").onclick = function () {
 				var sidebarMenuEl = document.getElementById("sidebar-menu");
 				sidebarMenuEl.classList.remove("open");
 				sidebarMenuEl.classList.add("closed");

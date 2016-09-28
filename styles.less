@@ -1,0 +1,36 @@
+@header-height: 50px;
+
+html, body {
+  height: 100%; 
+  margin: 0; 
+  padding: 0; 
+}
+header {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: @header-height;
+  background-color: rgb(77, 194, 209);
+  text-align: center;
+}
+header .title {
+  color: white;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 0 auto;
+  height: @header-height;
+  line-height: @header-height;
+}
+main {
+  position: absolute;
+  top: @header-height;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+}
+#map { height: 100%; }
+sidebar {
+  position: fixed;
+  background-color: green;
+}

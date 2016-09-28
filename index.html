@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+		<link rel="stylesheet/less" type="text/css" href="styles.less" />
+		<script src="less.min.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<header>
+			<span class="title">Parking App</span>
+		</header>
+		<sidebar>
+			<ul>
+				<li>New reservation</li>
+				<li>My reservations</li>
+				<li>Log out</li>
+			</ul>
+		</sidebar>
+		<main>
+			<div id="map"></div>
+		</main>
+
+		<script>
+			function initMap() {
+				// Create a map object and specify the DOM element for display.
+				var map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: -34.397, lng: 150.644},
+					scrollwheel: false,
+					zoom: 8
+				});
+			}
+		</script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaPABaWMydwSjQ8mgWHaRlZYEci2EfYo8&callback=initMap" async defer></script>
+	</body>
+</html>

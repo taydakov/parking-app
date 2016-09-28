@@ -13,13 +13,19 @@ header {
 	width: 100%;
 	height: @header-height;
 	background-color: rgb(77, 194, 209);
+	color: white;
 	text-align: center;
 }
 header .title {
-	color: white;
 	text-transform: uppercase;
 	display: inline-block;
 	margin: 0 auto;
+	height: @header-height;
+	line-height: @header-height;
+}
+header #open-sidebar-menu-button {
+	position: absolute;
+	left: @header-height/3;
 	height: @header-height;
 	line-height: @header-height;
 }
@@ -63,6 +69,11 @@ sidebar .sidebar-remaining {
 	bottom: 0;
 	background-color: black;
 	z-index: 1;
+}
+sidebar #close-sidebar-menu-button {
+	position: absolute;
+	top: 100px;
+	z-index: 3;
 }
 sidebar.open .sidebar-remaining {
 	opacity: 0.3;

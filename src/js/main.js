@@ -1,2 +1,2 @@
-import "./maps";
-import "./ui_interactions";
+import "./map"
+import "./ui_interactions"

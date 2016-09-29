@@ -3,7 +3,7 @@ import request from "superagent"
 const listUrl = "http://ridecellparking.herokuapp.com/api/v1/parkinglocations/search?lat={{lat}}&lng={{lng}}";
 const reserveUrl = "http://ridecellparking.herokuapp.com/api/v1/parkinglocations/{{id}}/reserve/";
 
-export function retrieveParking({lat, lng}, callback) {
+export function retrieveParking({lat, lng}, success, fail, finish) {
 	const url = listUrl
 		.replace("{{lat}}", lat)
 		.replace("{{lng}}", lng)
@@ -12,12 +12,15 @@ export function retrieveParking({lat, lng}, callback) {
 		.get(url)
 		.end((err, res) => {
 			if (!err && res) {
-				callback(res.body)
+				success && success(res.body)
+			} else {
+				fail && fail(err, res)
 			}
+			finish && finish()
 		})
 }
 
-export function reserveParking(id, duration, callback) {
+export function reserveParking(id, duration, success, fail, finish) {
 	console.log("Reserving spot #" + id)
 
 	const url = reserveUrl
@@ -28,7 +31,10 @@ export function reserveParking(id, duration, callback) {
 		.send({minutes: duration})
 		.end((err, res) => {
 			if (!err && res) {
-				callback(res.body)
+				success && success(res.body)
+			} else {
+				fail && fail(err, res)
 			}
+			finish && finish()
 		})
 }

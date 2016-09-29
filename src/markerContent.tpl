@@ -25,6 +25,6 @@
 		<button onclick="onMapMarkerPayReserveClick(this)" data-location-id="{{id}}">Pay and Reserve</button>
 	</div>
 	<div class="marker-more">
-		<span>More</span>
+		<span>One reservation is valid for 30 minutes</span>
 	</div>
 </div>

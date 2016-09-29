@@ -1,5 +1,9 @@
 @import "variables";
 
+@-ms-viewport{
+  width: device-width;
+}
+
 html, body {
 	height: 100%; 
 	margin: 0; 
@@ -9,6 +13,11 @@ html, body {
 
 body {
 	display: block;
+}
+
+input[type="text"] {
+	min-width: 20px;
+	border-bottom: rgb(100,100,100);
 }
 
 button {

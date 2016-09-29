@@ -4,7 +4,6 @@
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-		<script src="main.js"></script>
 	</head>
 	<body>
 		<header>
@@ -50,76 +49,7 @@
 			</div>
 		</main>
 
-		<script>
-			function loadPage(href)
-            {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("GET", href, false);
-                xmlhttp.send();
-                return xmlhttp.responseText;
-            }
-
-			function initMap() {
-				// Create a map object and specify the DOM element for display.
-				var map = new google.maps.Map(document.getElementById('map'), {
-					center: {lat: 37.7911578, lng: -122.2483725},
-					scrollwheel: false,
-					zoom: 15
-				});
-
-				var contentString = loadPage('marker-template.html');
-
-				var infowindow = new google.maps.InfoWindow({
-					content: contentString
-				});
-
-				var marker1 = new google.maps.Marker({
-					position: {lat: 37.791, lng: -122.2483725},
-					title:"Hello World!"
-				});
-				var marker2 = new google.maps.Marker({
-					position: {lat: 37.792, lng: -122.2483725},
-					title:"Hello World!!"
-				});
-				var marker3 = new google.maps.Marker({
-					position: {lat: 37.793, lng: -122.2483725},
-					title:"Hello World!!!"
-				});
-
-				marker1.addListener('click', function() {
-					infowindow.open(map, marker1);
-				});
-
-				marker1.setMap(map);
-				marker2.setMap(map);
-				marker3.setMap(map);
-			}
-		</script>
+		<script src="main.js" async defer></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaPABaWMydwSjQ8mgWHaRlZYEci2EfYo8&callback=initMap" async defer></script>
-		<script type="text/javascript">
-			document.getElementById("open-sidebar-menu-button").onclick = function () {
-				var sidebarMenuEl = document.getElementById("sidebar-menu");
-				sidebarMenuEl.classList.remove("closed");
-				sidebarMenuEl.classList.add("open");
-			};
-			document.getElementById("sidebar-remaining").onclick = function () {
-				var sidebarMenuEl = document.getElementById("sidebar-menu");
-				sidebarMenuEl.classList.remove("open");
-				sidebarMenuEl.classList.add("closed");
-			};
-			var isSearchBoxOpen = false;
-			document.getElementById("search-icon").onclick = function () {
-				var searchBoxEl = document.getElementById("search-box");
-				if (isSearchBoxOpen) {
-					searchBoxEl.classList.remove("open");
-					searchBoxEl.classList.add("closed");
-					isSearchBoxOpen = false;
-				} else {
-					searchBoxEl.classList.remove("closed");
-					searchBoxEl.classList.add("open");
-					isSearchBoxOpen = true;
-				}
-			}
-		</script>
 	</body>
 </html>

@@ -15,9 +15,7 @@ function loadPage(href)
 	return xmlhttp.responseText;
 }
 
-console.log('template = ', markerContent);
-
-function retrieveParking(lat, lng) {
+function retrieveParking({lat, lng}, callback) {
 	let url = listUrl
 		.replace("{{lat}}", lat)
 		.replace("{{lng}}", lng);
@@ -25,24 +23,56 @@ function retrieveParking(lat, lng) {
 	request
 		.get(url)
 		.end((err, res) => {
-			let spots = res.body.map(spot => (
-				{
-					position: {
-						lat: Number(spot.lat),
-						lng: Number(spot.lng)
-					},
-					title: `Spot #${spot.id}`
-				}
-			))
-			console.log("Markers = ", spots)
-			spots.forEach(spot => {
-				let marker = new google.maps.Marker(spot)
-				marker.setMap(map)
-			})
+			if (!err && res) {
+				callback(res.body)
+			}
+			// let spots = res.body.map(spot => (
+			// 	{
+			// 		position: {
+			// 			lat: Number(spot.lat),
+			// 			lng: Number(spot.lng)
+			// 		},
+			// 		title: `Spot #${spot.id}`
+			// 	}
+			// ))
+			// console.log("Markers = ", spots)
+			// spots.forEach(spot => {
+			// 	let marker = new google.maps.Marker(spot)
+			// 	marker.setMap(map)
+			// })
 		})
 }
 
-retrieveParking(defaultLocation.lat, defaultLocation.lng);
+retrieveParking(defaultLocation, data => {
+	let locations = data.map(location => (
+		{
+			position: {
+				lat: Number(location.lat),
+				lng: Number(location.lng)
+			},
+			id: location.id,
+			name: location.name,
+			title: location.name,
+			cost: location.cost_per_minute,
+			maxTime: location.max_reserve_time_mins,
+			minTime: location.min_reserve_time_mins
+		}
+	))
+	locations.forEach(location => {
+		let content = markerContent
+			.replace("{{name}}", location.name)
+			.replace("{{address}}", "Loading address...")
+			.replace("{{spots_number}}", "Unknown")
+			.replace("{{cost}}", location.cost)
+			.replace("{{distance}}", "Calculating...")
+		let marker = new google.maps.Marker(location)
+		let infowindow = new google.maps.InfoWindow({content})
+		marker.setMap(map)
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		});
+	})
+});
 
 /**
  * This function is called by Google Maps to initialize it

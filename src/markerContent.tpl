@@ -1,10 +1,10 @@
 <div class="marker-details">
 	<div class="marker-description">
 		<div class="marker-parking-name">
-			Monscone Center Parking
+			{{name}}<!-- Monscone Center Parking -->
 		</div>
 		<div class="marker-parking-address">
-			747 Howard St, San Francisco, CA 94103
+			{{address}}<!-- 747 Howard St, San Francisco, CA 94103 -->
 		</div>
 	</div>
 	<div class="marker-parameters">
@@ -15,9 +15,9 @@
 				<td>Distance</td>
 			</tr>
 			<tr>
-				<td>2</td>
-				<td>.25/min</td>
-				<td>.05 miles</td>
+				<td>{{spots_number}}<!-- 2 --></td>
+				<td>{{cost}}<!-- .25/min --></td>
+				<td>{{distance}}<!-- .05 miles --></td>
 			</tr>
 		</table>
 	</div>

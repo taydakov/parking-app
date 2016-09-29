@@ -19,6 +19,8 @@ Run the dev server, it automatically recompiles the project on file changes
 npm start
 ```
 
+Go to [localhost:8080](http://localhost:8080/).
+
 ## Compile
 
 ```

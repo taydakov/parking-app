@@ -1,22 +1,54 @@
-export function showSuccessDialog() {
-	let containerEl = document.getElementById("dialogs-container")
-	containerEl.classList.remove("closed")
-	containerEl.classList.add("open")
+function switchOpenClass(element) {
+	element.classList.remove("closed")
+	element.classList.add("open")
+}
+function switchClosedClass(element) {
+	element.classList.remove("open")
+	element.classList.add("closed")
 }
 
-export function hideSuccessDialog() {
-	let containerEl = document.getElementById("dialogs-container")
-	containerEl.classList.remove("open")
-	containerEl.classList.add("closed")
+function hideDialogs() {
+	let successEl = document.getElementById("success-dialog")
+	let errorEl = document.getElementById("error-dialog")
+	switchClosedClass(successEl)
+	switchClosedClass(errorEl)
 }
 
-export function showErrorDialog () {
-	// TODO: implement error message
+export function openSuccessDialog() {
+	hideDialogs()
+	let successEl = document.getElementById("success-dialog")
+	switchOpenClass(successEl)
+	let containerEl = document.getElementById("dialogs-container")
+	switchOpenClass(containerEl)
+}
+
+export function closeSuccessDialog() {
+	let containerEl = document.getElementById("dialogs-container")
+	switchClosedClass(containerEl)
+}
+
+export function openErrorDialog() {
+	hideDialogs()
+	let errorEl = document.getElementById("error-dialog")
+	switchOpenClass(errorEl)
+	let containerEl = document.getElementById("dialogs-container")
+	switchOpenClass(containerEl)
+}
+
+export function closeErrorDialog() {
+	let containerEl = document.getElementById("dialogs-container")
+	switchClosedClass(containerEl)
 }
 
 document.getElementById("dialogs-container").onclick = () => {
-	hideSuccessDialog();
+	closeSuccessDialog();
+	closeErrorDialog();
 }
+
+window.openSuccessDialog = openSuccessDialog
+window.closeSuccessDialog = closeSuccessDialog
+window.openErrorDialog = openErrorDialog
+window.closeErrorDialog = closeErrorDialog
 
 document.getElementById("open-sidebar-menu-button").onclick = () => {
 	var sidebarMenuEl = document.getElementById("sidebar-menu")

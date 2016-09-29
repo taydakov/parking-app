@@ -3,6 +3,7 @@ import * as ui from "./ui_interactions"
 import markerContent from "html!../markerContent.tpl"
 
 const defaultLocation = {lat: 37.783014, lng: -122.4027028}
+const defaultReservationDuration = 30 // minutes
 
 let map // Reference to the Google Maps instance on the page
 
@@ -38,6 +39,8 @@ function refreshMap() {
 				infowindow.open(map, marker)
 			})
 		})
+	}, err => {
+		ui.openErrorDialog()
 	})
 }
 
@@ -59,17 +62,15 @@ window.initMap = () => {
  */
 window.onMapMarkerPayReserveClick = element => {
 	let locationId = element.dataset.locationId
-	let duration = 30
+	let duration = defaultReservationDuration
 	let oldLabel = element.innerHTML
 	element.innerHTML = "Processing..."
 	api.reserveParking(locationId, duration, data => {
-		console.log("The spot is reserved")
-		element.innerHTML = oldLabel
-		ui.showSuccessDialog()
+		ui.openSuccessDialog()
 	}, err => {
-		console.log("Could not reserve a spot")
-		ui.showErrorDialog()
+		ui.openErrorDialog()
 	}, () => {
+		element.innerHTML = oldLabel
 		refreshMap()
 	})
 }

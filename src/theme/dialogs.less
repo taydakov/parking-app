@@ -25,7 +25,7 @@
 	background-color: rgba(0, 0, 0, 0);
 	transition: background-color @animation-duration;
 }
-.success-dialog {
+#success-dialog, #error-dialog {
 	position: absolute;
 	max-width: 250px;
 	height: 250px;
@@ -37,14 +37,20 @@
 	background-color: white;
 	box-shadow: @dialog-shadow;
 }
+#success-dialog.open, #error-dialog.open {
+	display: block;
+}
+#success-dialog.closed, #error-dialog.closed {
+	display: none;
+}
 .dialog-header {
 	position: relative;
 	height: 33%;
 }
-.success-dialog .dialog-header {
+#success-dialog .dialog-header {
 	background-color: @main-color;
 }
-.error-dialog .dialog-header {
+#error-dialog .dialog-header {
 	background-color: red;
 }
 .dialog-header span {
@@ -68,6 +74,7 @@
 }
 .dialog-message {
 	font-size: 0.9em;
+	line-height: 1.1em;
 }
 .dialog-footer {
 	position: relative;

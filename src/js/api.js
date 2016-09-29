@@ -21,8 +21,6 @@ export function retrieveParking({lat, lng}, success, fail, finish) {
 }
 
 export function reserveParking(id, duration, success, fail, finish) {
-	console.log("Reserving spot #" + id)
-
 	const url = reserveUrl
 		.replace("{{id}}", id)
 

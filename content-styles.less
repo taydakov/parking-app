@@ -1,7 +1,11 @@
 @import "global-styles"; 
 
-@search-box-height: 200px;
-@search-box-margin: 20px;
+@search-box-height: auto;
+@search-box-spacing: 15px;
+@search-box-shadow: 1px 1px 5px rgba(100,100,100,1);
+@search-box-animation-duration: 0.2s;
+@search-icon-size: 30px;
+@search-submit-size: @search-icon-size;
 
 main {
 	position: absolute;
@@ -16,10 +20,94 @@ main {
 #search-box {
 	position: absolute;
 	top: 0;
-	left: @search-box-margin;
-	right: @search-box-margin;
+	left: @search-box-spacing;
+	right: @search-box-spacing;
 	height: @search-box-height;
+	max-width: 400px;
 	margin: 0 auto;
+	padding: @search-box-spacing;
 	background-color: white;
-	box-shadow: 1px 1px 5px 0px rgba(100,100,100,1);
+	color: rgb(100,100,100);
+	font-size: 1.3em;
+	box-shadow: @search-box-shadow;
+	z-index: 999;
+}
+#search-box.open {
+	transform: translateY(0);
+	transition: transform @search-box-animation-duration;
+}
+#search-box.closed {
+	transform: translateY(-95%);
+	transition: transform @search-box-animation-duration;
+}
+#search-box > div {
+	display: flex;
+	margin-bottom: @search-box-spacing;
+}
+#search-box > div > .icon {
+	display: inline-block;
+	height: @search-icon-size;
+	width: @search-icon-size;
+	text-align: center;
+	vertical-align: center;
+}
+#search-box .icon * {
+	height: @search-icon-size;
+	line-height: @search-icon-size;
+}
+#search-box input {
+	flex: 2;
+	vertical-align: center;
+}
+#search-box .search-location {
+	width: 100%;
+}
+#search-box .search-location > input {
+}
+#search-box .search-date, #search-box .search-time {
+	display: inline-flex;
+	width: 50%;
+}
+#search-box .search-submit-container {
+	margin-bottom: 0;
+}
+#search-box .search-submit {
+	margin: 0 auto;
+	width: 100px;
+	height: @search-submit-size;
+	background-color: @main-color;
+	color: white;
+}
+#search-box:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	filter: drop-shadow(@search-box-shadow);
+	border-top-color: white;
+	border-width: @search-icon-size * 1.5;
+	margin-left: -@search-icon-size * 1.5;
+	z-index: 2;
+}
+#search-box .hide-top-shadow{
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-bottom: 0;
+	transform: translateX(-50%);
+	background-color: white;
+	width: @search-icon-size*4;
+	height: 10px;
+	z-index: 998;
+}
+#search-icon {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: -@search-icon-size / 2 * 1.5;
+	z-index: 999;
 }

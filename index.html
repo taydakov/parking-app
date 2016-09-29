@@ -31,8 +31,26 @@
 		</sidebar>
 		<main>
 			<div id="map"></div>
-			<div id="search-box">
-				Search Box
+			<div id="search-box" class="closed">
+				<div class="search-location">
+					<span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+					<input type="text" placeholder="Location" />
+				</div>
+				<div class="search-date">
+					<span class="icon"><i class="icon fa fa-calendar-o" aria-hidden="true"></i></span>
+					<input type="text" placeholder="Date" />
+				</div><!-- don't put new line here --><div class="search-time">
+					<span class="icon"><i class="icon fa fa-clock-o" aria-hidden="true"></i></span>
+					<input type="text" placeholder="Time" />
+				</div>
+				<div class="search-slider">
+					Slider placeholder
+				</div>
+				<div class="search-submit-container">
+					<button class="search-submit">Search</button>
+				</div>
+				<div class="hide-top-shadow"></div>
+				<span id="search-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
 			</div>
 		</main>
 
@@ -58,6 +76,20 @@
 				sidebarMenuEl.classList.remove("open");
 				sidebarMenuEl.classList.add("closed");
 			};
+			var isSearchBoxOpen = false;
+			document.getElementById("search-icon").onclick = function () {
+				console.log("search icon clicked isSearchBoxOpen = " + isSearchBoxOpen);
+				var searchBoxEl = document.getElementById("search-box");
+				if (isSearchBoxOpen) {
+					searchBoxEl.classList.remove("open");
+					searchBoxEl.classList.add("closed");
+					isSearchBoxOpen = false;
+				} else {
+					searchBoxEl.classList.remove("closed");
+					searchBoxEl.classList.add("open");
+					isSearchBoxOpen = true;
+				}
+			}
 		</script>
 	</body>
 </html>

@@ -22,7 +22,7 @@
 		</table>
 	</div>
 	<div class="marker-submit">
-		<button>Pay and Reserve</button>
+		<button onclick="onMapMarkerPayReserveClick(this)" data-location-id="{{id}}">Pay and Reserve</button>
 	</div>
 	<div class="marker-more">
 		<span>More</span>

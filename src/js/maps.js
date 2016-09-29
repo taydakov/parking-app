@@ -7,14 +7,6 @@ const defaultLocation = {lat: 37.783014, lng: -122.4027028}
 
 let map;
 
-function loadPage(href)
-{
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.open("GET", href, false);
-	xmlhttp.send();
-	return xmlhttp.responseText;
-}
-
 function retrieveParking({lat, lng}, callback) {
 	let url = listUrl
 		.replace("{{lat}}", lat)
@@ -26,21 +18,11 @@ function retrieveParking({lat, lng}, callback) {
 			if (!err && res) {
 				callback(res.body)
 			}
-			// let spots = res.body.map(spot => (
-			// 	{
-			// 		position: {
-			// 			lat: Number(spot.lat),
-			// 			lng: Number(spot.lng)
-			// 		},
-			// 		title: `Spot #${spot.id}`
-			// 	}
-			// ))
-			// console.log("Markers = ", spots)
-			// spots.forEach(spot => {
-			// 	let marker = new google.maps.Marker(spot)
-			// 	marker.setMap(map)
-			// })
 		})
+}
+
+function reserveParking(id, callback) {
+	console.log("Reserving spot #" + id)
 }
 
 retrieveParking(defaultLocation, data => {
@@ -60,6 +42,7 @@ retrieveParking(defaultLocation, data => {
 	))
 	locations.forEach(location => {
 		let content = markerContent
+			.replace("{{id}}", location.id)
 			.replace("{{name}}", location.name)
 			.replace("{{address}}", "Loading address...")
 			.replace("{{spots_number}}", "Unknown")
@@ -69,45 +52,24 @@ retrieveParking(defaultLocation, data => {
 		let infowindow = new google.maps.InfoWindow({content})
 		marker.setMap(map)
 		marker.addListener('click', function() {
-			infowindow.open(map, marker);
-		});
+			infowindow.open(map, marker)
+		})
 	})
-});
+})
+
+window.onMapMarkerPayReserveClick = element => {
+	reserveParking(element.dataset.locationId, () => {
+
+	})
+}
 
 /**
- * This function is called by Google Maps to initialize it
+ * This function is called by Google Maps SDK for initialization
  */
-window.initMap = function () {
+window.initMap = () => {
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: defaultLocation,
 		scrollwheel: false,
-		zoom: 15
-	});
-
-	// var contentString = loadPage('marker-template.html');
-
-	// var infowindow = new google.maps.InfoWindow({
-	// 	content: contentString
-	// });
-
-	// var marker1 = new google.maps.Marker({
-	// 	position: {lat: 37.791, lng: -122.2483725},
-	// 	title:"Hello World!"
-	// });
-	// var marker2 = new google.maps.Marker({
-	// 	position: {lat: 37.792, lng: -122.2483725},
-	// 	title:"Hello World!!"
-	// });
-	// var marker3 = new google.maps.Marker({
-	// 	position: {lat: 37.793, lng: -122.2483725},
-	// 	title:"Hello World!!!"
-	// });
-
-	// marker1.addListener('click', function() {
-	// 	infowindow.open(map, marker1);
-	// });
-
-	// marker1.setMap(map);
-	// marker2.setMap(map);
-	// marker3.setMap(map);
-};
+		zoom: 16
+	})
+}

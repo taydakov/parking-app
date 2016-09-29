@@ -30,8 +30,8 @@ module.exports = {
         loader: "style!css!autoprefixer!less"
       },
       {
-        test: /\.(html|min[.]css)$/,
-        loader: "file?name=[name].[ext]"
+        test: /\.(html)$/,
+        loader: "file?name=[name].[ext]!html-minify"
       },
       {
         test: /\.(png|jpg|jpeg|gif|woff)$/,

@@ -8,9 +8,9 @@ const defaultLocation = {lat: 37.783014, lng: -122.4027028}
 let map;
 
 function retrieveParking({lat, lng}, callback) {
-	let url = listUrl
+	const url = listUrl
 		.replace("{{lat}}", lat)
-		.replace("{{lng}}", lng);
+		.replace("{{lng}}", lng)
 
 	request
 		.get(url)
@@ -21,12 +21,25 @@ function retrieveParking({lat, lng}, callback) {
 		})
 }
 
-function reserveParking(id, callback) {
+function reserveParking(id, duration, callback) {
 	console.log("Reserving spot #" + id)
+
+	const url = reserveUrl
+		.replace("{{id}}", id)
+
+	request
+		.post(url)
+		.send({minutes: duration})
+		.end((err, res) => {
+			if (!err && res) {
+				callback(res.body)
+			}
+		})
 }
 
 retrieveParking(defaultLocation, data => {
-	let locations = data.map(location => (
+	const isAvailable = location => (new Date(location.reserved_until) < new Date())
+	const locations = data.filter(isAvailable).map(location => (
 		{
 			position: {
 				lat: Number(location.lat),
@@ -41,15 +54,15 @@ retrieveParking(defaultLocation, data => {
 		}
 	))
 	locations.forEach(location => {
-		let content = markerContent
+		const content = markerContent
 			.replace("{{id}}", location.id)
 			.replace("{{name}}", location.name)
 			.replace("{{address}}", "Loading address...")
 			.replace("{{spots_number}}", "Unknown")
 			.replace("{{cost}}", location.cost)
 			.replace("{{distance}}", "Calculating...")
-		let marker = new google.maps.Marker(location)
-		let infowindow = new google.maps.InfoWindow({content})
+		const marker = new google.maps.Marker(location)
+		const infowindow = new google.maps.InfoWindow({content})
 		marker.setMap(map)
 		marker.addListener('click', function() {
 			infowindow.open(map, marker)
@@ -58,8 +71,8 @@ retrieveParking(defaultLocation, data => {
 })
 
 window.onMapMarkerPayReserveClick = element => {
-	reserveParking(element.dataset.locationId, () => {
-
+	reserveParking(element.dataset.locationId, 40, data => {
+		console.log("Reserved, data = ", data)
 	})
 }
 

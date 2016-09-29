@@ -1,2 +1,2 @@
 import "./map"
-import "./ui_interactions"
+import "./ui"

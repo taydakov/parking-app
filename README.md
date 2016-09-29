@@ -1,6 +1,15 @@
 # Parking app
 
-App for reserving parking spots
+App for reserving parking spots in SF (for demonstration only, no real parking is reserved actually).
+
+## Technologies and techniques used
+
+* HTML/CSS/JS duh!
+* LESS
+* ES6 and Babel
+* Webpack for dependencies management and JS/CSS compilation
+* Minification of CSS, JS, and HTML
+* Reset css rules, and auto css vendor prefixes
 
 ## Install
 

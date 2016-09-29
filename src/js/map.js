@@ -1,5 +1,5 @@
 import * as api from "./api"
-import * as ui from "./ui_interactions"
+import * as ui from "./ui_actions"
 import markerContent from "html!../markerContent.tpl"
 
 const defaultLocation = {lat: 37.783014, lng: -122.4027028}

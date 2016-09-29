@@ -30,14 +30,16 @@ module.exports = {
         loader: "style!css!autoprefixer!less"
       },
       {
-        test: /\.html$/,
+        test: /\.(html|min[.]css)$/,
         loader: "file?name=[name].[ext]"
       },
       {
         test: /\.(png|jpg|jpeg|gif|woff)$/,
         loader: 'url-loader?limit=8192'
-      }
-    ]
+      },
+      // Font Definitions
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }    ]
   },
   devServer: {
     contentBase: "./src"

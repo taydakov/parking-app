@@ -7,7 +7,7 @@ module.exports = {
     './src/theme/main.less',
     './src/index.html',
     './src/marker-template.html',
-    './src/main'
+    './src/js/main'
   ],
   output: {
       publicPath: '/',

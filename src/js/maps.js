@@ -1,43 +1,11 @@
-import request from "superagent";
-import markerContent from "html!../markerContent.tpl";
+import * as api from "./api"
+import markerContent from "html!../markerContent.tpl"
 
-const listUrl = "http://ridecellparking.herokuapp.com/api/v1/parkinglocations/search?lat={{lat}}&lng={{lng}}";
-const reserveUrl = "http://ridecellparking.herokuapp.com/api/v1/parkinglocations/{{id}}/reserve/";
 const defaultLocation = {lat: 37.783014, lng: -122.4027028}
 
 let map;
 
-function retrieveParking({lat, lng}, callback) {
-	const url = listUrl
-		.replace("{{lat}}", lat)
-		.replace("{{lng}}", lng)
-
-	request
-		.get(url)
-		.end((err, res) => {
-			if (!err && res) {
-				callback(res.body)
-			}
-		})
-}
-
-function reserveParking(id, duration, callback) {
-	console.log("Reserving spot #" + id)
-
-	const url = reserveUrl
-		.replace("{{id}}", id)
-
-	request
-		.post(url)
-		.send({minutes: duration})
-		.end((err, res) => {
-			if (!err && res) {
-				callback(res.body)
-			}
-		})
-}
-
-retrieveParking(defaultLocation, data => {
+api.retrieveParking(defaultLocation, data => {
 	const isAvailable = location => (new Date(location.reserved_until) < new Date())
 	const locations = data.filter(isAvailable).map(location => (
 		{
@@ -70,12 +38,6 @@ retrieveParking(defaultLocation, data => {
 	})
 })
 
-window.onMapMarkerPayReserveClick = element => {
-	reserveParking(element.dataset.locationId, 40, data => {
-		console.log("Reserved, data = ", data)
-	})
-}
-
 /**
  * This function is called by Google Maps SDK for initialization
  */
@@ -84,5 +46,16 @@ window.initMap = () => {
 		center: defaultLocation,
 		scrollwheel: false,
 		zoom: 16
+	})
+}
+
+/**
+ * This function is called onclick on Pay and Reserve button that is on a map marker
+ */
+window.onMapMarkerPayReserveClick = element => {
+	let locationId = element.dataset.locationId
+	let duration = 40
+	api.reserveParking(locationId, duration, data => {
+		console.log("Reserved, data = ", data)
 	})
 }

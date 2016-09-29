@@ -6,7 +6,6 @@ module.exports = {
     'babel-polyfill',
     './src/theme/main.less',
     './src/index.html',
-    './src/marker-template.html',
     './src/js/main'
   ],
   output: {

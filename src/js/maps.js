@@ -1,5 +1,5 @@
 import request from "superagent";
-import markerTemplate from "../marker-template.html";
+import markerContent from "html!../markerContent.tpl";
 
 const listUrl = "http://ridecellparking.herokuapp.com/api/v1/parkinglocations/search?lat={{lat}}&lng={{lng}}";
 const reserveUrl = "http://ridecellparking.herokuapp.com/api/v1/parkinglocations/{{id}}/reserve/";
@@ -14,6 +14,8 @@ function loadPage(href)
 	xmlhttp.send();
 	return xmlhttp.responseText;
 }
+
+console.log('template = ', markerContent);
 
 function retrieveParking(lat, lng) {
 	let url = listUrl

@@ -1,6 +1,4 @@
-@header-height: 50px;
-@main-color: rgb(77, 194, 209);
-@main-color-transparent: rgba(77, 194, 209, 0.7);
+@import "variables";
 
 html, body {
 	height: 100%; 
@@ -11,4 +9,18 @@ html, body {
 
 body {
 	display: block;
+}
+
+button {
+	margin: 0 auto;
+	width: 100px;
+	height: @header-height/2;
+	background-color: @main-color;
+	color: white;
+    border: 0;
+    box-shadow: 1px 1px 1px rgb(100, 100, 100);
+    border-radius: 2px;
+}
+button:active {
+	box-shadow: inset 1px 1px 1px rgb(100, 100, 100);
 }

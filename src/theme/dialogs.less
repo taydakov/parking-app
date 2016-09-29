@@ -1,0 +1,81 @@
+@import "variables";
+
+@dialog-spacing: 10px;
+@animation-duration: 1s;
+@dialog-shadow: 1px 1px 5px rgba(100,100,100,1);
+@dialog-icon-size: 50px;
+
+.dialogs-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 2001;
+	overflow: hidden;
+	opacity: 0.95;
+}
+.dialogs-container.open {
+	visibility: visible;
+	background-color: rgba(0, 0, 0, 0.2);
+	transition: background-color @animation-duration, visibility @animation-duration;
+}
+.dialogs-container.closed {
+	visibility: collapse;
+	background-color: rgba(0, 0, 0, 0);
+	transition: background-color @animation-duration;
+}
+.success-dialog {
+	position: absolute;
+	max-width: 250px;
+	height: 250px;
+	top: 50%;
+	transform: translateY(-50%);
+	left: @dialog-spacing;
+	right: @dialog-spacing;
+	margin: 0 auto;
+	background-color: white;
+	box-shadow: @dialog-shadow;
+}
+.dialog-header {
+	position: relative;
+	height: 33%;
+}
+.success-dialog .dialog-header {
+	background-color: @main-color;
+}
+.error-dialog .dialog-header {
+	background-color: red;
+}
+.dialog-header span {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	font-size: @dialog-icon-size;
+	color: white;
+}
+.dialog-content {
+	display: block;
+	height: 40%;
+	padding: 10%;
+	box-sizing: border-box;
+	text-align: center;
+}
+.dialog-title {
+	font-weight: bold;
+	margin-bottom: 17px;
+}
+.dialog-message {
+	font-size: 0.9em;
+}
+.dialog-footer {
+	position: relative;
+	height: 27%;
+}
+.dialog-close-button {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}

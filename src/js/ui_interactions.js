@@ -1,9 +1,21 @@
 export function showSuccessDialog() {
-	
+	let containerEl = document.getElementById("dialogs-container")
+	containerEl.classList.remove("closed")
+	containerEl.classList.add("open")
 }
 
-export function showErrorDialog() {
-	
+export function hideSuccessDialog() {
+	let containerEl = document.getElementById("dialogs-container")
+	containerEl.classList.remove("open")
+	containerEl.classList.add("closed")
+}
+
+export function showErrorDialog () {
+	// TODO: implement error message
+}
+
+document.getElementById("dialogs-container").onclick = () => {
+	hideSuccessDialog();
 }
 
 document.getElementById("open-sidebar-menu-button").onclick = () => {

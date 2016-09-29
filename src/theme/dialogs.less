@@ -5,7 +5,7 @@
 @dialog-shadow: 1px 1px 5px rgba(100,100,100,1);
 @dialog-icon-size: 50px;
 
-.dialogs-container {
+#dialogs-container {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -15,12 +15,12 @@
 	overflow: hidden;
 	opacity: 0.95;
 }
-.dialogs-container.open {
+#dialogs-container.open {
 	visibility: visible;
 	background-color: rgba(0, 0, 0, 0.2);
 	transition: background-color @animation-duration, visibility @animation-duration;
 }
-.dialogs-container.closed {
+#dialogs-container.closed {
 	visibility: collapse;
 	background-color: rgba(0, 0, 0, 0);
 	transition: background-color @animation-duration;

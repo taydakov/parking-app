@@ -7,6 +7,7 @@
 		<link rel="stylesheet/less" type="text/css" href="header-styles.less" />
 		<link rel="stylesheet/less" type="text/css" href="sidebar-styles.less" />
 		<link rel="stylesheet/less" type="text/css" href="content-styles.less" />
+		<link rel="stylesheet/less" type="text/css" href="map-styles.less" />
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 		<script src="less.min.js" type="text/javascript"></script>
 	</head>
@@ -52,16 +53,92 @@
 				<div class="hide-top-shadow"></div>
 				<span id="search-icon"><i class="fa fa-search" aria-hidden="true"></i></span>
 			</div>
+			<div class="marker-details">
+				<div class="marker-description">
+					<div class="marker-parking-name">
+						Monscone Center Parking
+					</div>
+					<div class="marker-parking-address">
+						747 Howard St, San Francisco, CA 94103
+					</div>
+				</div>
+				<div class="marker-parameters">
+					<table>
+						<tr>
+							<td>Open Spots</td>
+							<td>Cost</td>
+							<td>Distance</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>.25/min</td>
+							<td>.05 miles</td>
+						</tr>
+					</table>
+				</div>
+				<div class="marker-submit">
+					<button>Pay and Reserve</button>
+				</div>
+				<div class="marker-more">
+					<span>More</span>
+				</div>
+			</div>
 		</main>
 
 		<script>
 			function initMap() {
 				// Create a map object and specify the DOM element for display.
 				var map = new google.maps.Map(document.getElementById('map'), {
-					center: {lat: -34.397, lng: 150.644},
+					center: {lat: 37.7911578, lng: -122.2483725},
 					scrollwheel: false,
-					zoom: 8
+					zoom: 15
 				});
+
+				var contentString = '<div id="content">'+
+					'<div id="siteNotice">'+
+					'</div>'+
+					'<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+					'<div id="bodyContent">'+
+					'<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+					'sandstone rock formation in the southern part of the '+
+					'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+					'south west of the nearest large town, Alice Springs; 450&#160;km '+
+					'(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+					'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+					'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+					'Aboriginal people of the area. It has many springs, waterholes, '+
+					'rock caves and ancient paintings. Uluru is listed as a World '+
+					'Heritage Site.</p>'+
+					'<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+					'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+					'(last visited June 22, 2009).</p>'+
+					'</div>'+
+					'</div>';
+
+				var infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+
+				var marker1 = new google.maps.Marker({
+					position: {lat: 37.791, lng: -122.2483725},
+					title:"Hello World!"
+				});
+				var marker2 = new google.maps.Marker({
+					position: {lat: 37.792, lng: -122.2483725},
+					title:"Hello World!!"
+				});
+				var marker3 = new google.maps.Marker({
+					position: {lat: 37.793, lng: -122.2483725},
+					title:"Hello World!!!"
+				});
+
+				marker1.addListener('click', function() {
+					infowindow.open(map, marker1);
+				});
+
+				marker1.setMap(map);
+				marker2.setMap(map);
+				marker3.setMap(map);
 			}
 		</script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaPABaWMydwSjQ8mgWHaRlZYEci2EfYo8&callback=initMap" async defer></script>
@@ -78,7 +155,6 @@
 			};
 			var isSearchBoxOpen = false;
 			document.getElementById("search-icon").onclick = function () {
-				console.log("search icon clicked isSearchBoxOpen = " + isSearchBoxOpen);
 				var searchBoxEl = document.getElementById("search-box");
 				if (isSearchBoxOpen) {
 					searchBoxEl.classList.remove("open");
